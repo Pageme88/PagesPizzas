@@ -32,7 +32,7 @@ const OrderSchema = new Schema({
             'Beef', 'Salami', 'Artichoke Hearts', 'Feta Cheese'
         ],
         default: [],
-        validate: [arrayLimit, '{PATH} exceeds the limit of 5'] // Optional: Validate max 21 toppings
+        validate: [arrayLimit, '{PATH} exceeds the limit of 5']
     },
     addOns: {
         type: [String],
