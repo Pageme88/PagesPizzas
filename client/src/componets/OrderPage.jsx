@@ -191,9 +191,25 @@ const OrderPage = () => {
         setTotal(newTotal);
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!order.method) newErrors.method = 'Please select a method.';
+        if (!order.type) newErrors.type = 'Please select a type.';
+        if (!order.crust) newErrors.crust = 'Please select a crust.';
+        if (!order.size) newErrors.size = 'Please select a size.';
+        if (!order.pizzaType && !order.createOwn) newErrors.pizzaType = 'Please select a pizza type.';
+        if (order.createOwn && order.customToppings.length === 0) newErrors.customToppings = 'Please select at least one topping.';
+        
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/ordercart', { state: { order, total } });
+        if (validateForm()) {
+            navigate('/ordercart', { state: { order, total } });
+        }
     };
 
     return (
